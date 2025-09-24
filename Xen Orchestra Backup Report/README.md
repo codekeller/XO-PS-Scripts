@@ -169,6 +169,14 @@ The script generates a comprehensive HTML report containing:
 - Error messages for failed jobs
 - Filterable by status type
 
+## Example Output
+
+The script generates comprehensive HTML reports with executive summaries and detailed execution logs:
+
+![Sample Backup Report](examples/sample_report_screenshot.png)
+
+**[View Full Interactive Report](examples/sample_report.html)** - Shows responsive design and hover effects
+
 ## Scheduling Automation
 
 ### Windows Task Scheduler
