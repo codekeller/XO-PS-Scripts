@@ -1,2 +1,3 @@
-# XO-PS-Scripts
-Xen Orchestra Powershell Scripts
+# A collection of Xen Orchestra Powershell Scripts
+
+
