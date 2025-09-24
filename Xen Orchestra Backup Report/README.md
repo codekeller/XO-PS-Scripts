@@ -171,7 +171,7 @@ The script generates a comprehensive HTML report containing:
 
 ## Example Output
 
-The script generates comprehensive HTML reports with executive summaries and detailed execution logs:
+The script generates comprehensive HTML reports with backup job summaries and detailed execution logs:
 
 ![Sample Backup Report](examples/sample_report_screenshot.png)
 
