@@ -304,9 +304,8 @@ function Invoke-XenOrchestraApi {
                 } 
                 else {
                     Write-Log "Configuring custom SSL certificate validation (PS 5.1)" -Level Debug
-                    $originalCallback = [System.Net.ServicePointManager]::ServerCertificateValidationCallback
-                    [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {
-                        param($sender, $certificate, $chain, $sslPolicyErrors)
+                    $originalCallback = [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {
+                        param($sslSender, $certificate, $chain, $sslPolicyErrors)
                         return $true
                     }
                     
@@ -925,10 +924,23 @@ function ConvertTo-HtmlReport {
     .summary .label { font-size: 12px; color: #7f8c8d; margin-top: 5px; }
     
     .job-definition-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 20px;
+        /* Fallback for email clients that don't support grid */
+        width: 100%;
         margin-top: 15px;
+        /* Use table display for better email client support */
+        display: table;
+        table-layout: fixed;
+        border-spacing: 20px 0;
+    }
+    
+    /* Modern browsers will use grid, email clients will ignore this */
+    @supports (display: grid) {
+        .job-definition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            border-spacing: 0;
+        }
     }
     
     .job-type-group {
@@ -936,6 +948,33 @@ function ConvertTo-HtmlReport {
         border: 1px solid #ddd;
         border-radius: 5px;
         overflow: hidden;
+        /* For email clients using table display */
+        display: table-cell;
+        vertical-align: top;
+        width: 33.33%;
+        /* Minimum width to prevent too much squishing */
+        min-width: 300px;
+    }
+    
+    /* Modern browsers using grid will override the table-cell display */
+    @supports (display: grid) {
+        .job-type-group {
+            display: block;
+            width: auto;
+        }
+    }
+    
+    /* Responsive behavior for narrow screens */
+    @media screen and (max-width: 1000px) {
+        .job-definition-grid {
+            display: block !important;
+            border-spacing: 0;
+        }
+        .job-type-group {
+            display: block !important;
+            width: 100% !important;
+            margin-bottom: 20px;
+        }
     }
     
     .job-type-header {
@@ -1642,7 +1681,7 @@ try {
     Write-Log "Testing authentication..." -Level Information
     
     try {
-        $testResponse = Invoke-XenOrchestraApi -Uri "$baseApiUrl/vms" -Headers $headers -TimeoutSec $TimeoutSeconds -MaxRetries 1 -SkipCertificateCheck:$SkipCertificateCheck
+        $null = Invoke-XenOrchestraApi -Uri "$baseApiUrl/vms" -Headers $headers -TimeoutSec $TimeoutSeconds -MaxRetries 1 -SkipCertificateCheck:$SkipCertificateCheck
         Write-Log "Authentication successful using cookie method" -Level Information
     }
     catch {
@@ -1651,7 +1690,7 @@ try {
         $headers.Remove('Cookie')
         
         try {
-            $testResponse = Invoke-XenOrchestraApi -Uri "$baseApiUrl/vms" -Headers $headers -TimeoutSec $TimeoutSeconds -MaxRetries 1 -SkipCertificateCheck:$SkipCertificateCheck
+            $null = Invoke-XenOrchestraApi -Uri "$baseApiUrl/vms" -Headers $headers -TimeoutSec $TimeoutSeconds -MaxRetries 1 -SkipCertificateCheck:$SkipCertificateCheck
             Write-Log "Authentication successful using Bearer token" -Level Information
         }
         catch {
