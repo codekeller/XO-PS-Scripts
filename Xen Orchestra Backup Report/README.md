@@ -19,7 +19,7 @@ This script connects to your Xen Orchestra server to provide a complete view of 
 
 ## Prerequisites
 
-- PowerShell 5.1 or higher (Windows PowerShell) or PowerShell Core 6+ (cross-platform)
+- PowerShell 7
 - Network connectivity to your Xen Orchestra server
 - Valid Xen Orchestra API token with appropriate permissions
 - SMTP server access (if using email functionality)
