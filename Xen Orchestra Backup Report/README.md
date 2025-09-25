@@ -175,7 +175,7 @@ The script generates a comprehensive HTML report with backup job summaries and d
 configured on the Xen Orchestra server and their last run status within the configured timeframe (last 24 hours by default).  If any of these jobs has ran more than once in the last 24 hours then it shows the
 status of that last run.
 
-The "Detailed Backup Execution Logs" section shows additional details about each instance of a backup job that has run within the configured timeframe (last 24 hours by default).  If any jobs have ran more than once in the last 24 hours then it shows the status of each instance of a job and the details for that instance.
+The "Detailed Backup Execution Logs" section shows additional details about each instance of a backup job that has run within the configured timeframe (last 24 hours by default).  If any jobs have ran more than once in the last 24 hours then it shows the status of each instance of a job and the details for that instance.  It also differentiates between a job that was skipped because no VMs were identified in the backup job filter vs jobs that did not execute at all in the defined timeframe.
 
 ![Sample Backup Report](examples/sample_report_screenshot.png)
 
