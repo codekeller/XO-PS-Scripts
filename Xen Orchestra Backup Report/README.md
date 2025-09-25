@@ -196,6 +196,7 @@ $Principal = New-ScheduledTaskPrincipal -UserId "DOMAIN\ServiceAccount" -LogonTy
 Register-ScheduledTask -TaskName "XO Daily Backup Report" -Action $Action -Trigger $Trigger -Principal $Principal
 ```
 
+
 ## Troubleshooting
 
 ### Authentication Issues
