@@ -196,12 +196,6 @@ $Principal = New-ScheduledTaskPrincipal -UserId "DOMAIN\ServiceAccount" -LogonTy
 Register-ScheduledTask -TaskName "XO Daily Backup Report" -Action $Action -Trigger $Trigger -Principal $Principal
 ```
 
-### Linux/macOS Cron
-Add to crontab for daily execution:
-```bash
-# Daily at 8:00 AM
-0 8 * * * /usr/bin/pwsh -File "/opt/scripts/Get-XenOrchestraBackupReport.ps1" -XenOrchestraUrl "https://xo.company.com" -ApiTokenFile "/secure/xo-token.txt" -SendEmail -SmtpServer "mail.company.com" -EmailFrom "xo-reports@company.com" -EmailTo "admin@company.com"
-```
 
 ## Troubleshooting
 
