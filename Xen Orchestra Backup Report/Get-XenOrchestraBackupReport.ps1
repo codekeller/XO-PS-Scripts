@@ -1175,7 +1175,7 @@ function ConvertTo-HtmlReport {
     </div>
     <div>
         <div class="number" style="color: #2980b9;">$jobsRun</div>
-        <div class="label">Executed (24h)</div>
+        <div class="label">Executed</div>
     </div>
     <div>
         <div class="number" style="color: #27ae60;">$successfulJobs</div>
